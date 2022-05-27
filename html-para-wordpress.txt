@@ -1,0 +1,229 @@
+Links úteis:
+https://developer.wordpress.org/reference
+https://codex.wordpress.org/Theme_Development
+https://codex.wordpress.org/Template_Tags
+https://developer.wordpress.org/themes/basics/template-hierarchy
+https://wphierarchy.com
+https://codex.wordpress.org/The_Loop
+https://www.origamid.com/curso/extras
+https://www.origamid.com/slide/extras/#/02-custom-field-acf
+https://www.origamid.com/slide/extras/#/03-custom-field-cmb2
+https://www.advancedcustomfields.com/resources
+https://www.advancedcustomfields.com/resources/code-examples
+https://www.advancedcustomfields.com/resources/repeater
+https://www.advancedcustomfields.com/resources/code-examples/#getting-values%20from%20another%20page
+https://codex.wordpress.org/Navigation_Menus
+https://github.com/CMB2/CMB2/wiki
+https://github.com/CMB2/CMB2/wiki/Field-Types
+https://docs.google.com/spreadsheets/d/1mSqienVYxLopTFGLPK0lGCJst2knKzXDtLQRgwjeBN8/edit#gid=3
+
+
+
+// INSTALAR O WORDPRESS:
+
+
+1 - Download do WordPress (wordpress.org)
+
+2 - Criar uma pasta no repositório de sites do MAMP / Laragon
+
+3 - Extrair os arquivos do WordPress nela
+
+4 - Criar um Banco de Dados no phpMyAdmin / HeidiSQL
+phpMyAdmin > Databates > Escolha o nome > Clique em Create
+HeidiSQL > Botão direito > Criar novo banco de dados
+
+5 - Criar o usuário do Banco de Dados
+phpMyAdmin > Users > Add User > Nome, host(localhost), password.
+HeidiSQL > Ferramentas > Gerenciador de usuários 
+Maque Check All em Global Privileges
+
+6 - Acessar o site (url_site/wp-admin) configurar o WordPress com as informações do banco de dados
+
+7 - Criar o usuário do WordPress
+
+
+
+// APÓS INSTALAR O WORDPRESS:
+
+
+1 - Copiar a pasta do site para wp-content/themes/
+
+
+2 - Mudar o index.html para index.php
+
+
+3 - Colocar/criar o arquivo style.css na raiz do tema
+@import 'css/reset.css';
+
+
+4 - Adicionar a descrição do tema no topo do style.css
+
+/*
+Theme Name: Bikcraft
+Theme URI: https://bikcraft.com
+Author: Luiz Gustavo
+Author URI: https://bikcraft.com
+Description: Tema criado para a Bikcraft
+Version: 1.0
+*/
+
+
+5 - Ativar o tema no WordPress
+
+
+6 - Corrigir o caminho do style.css e outros caminhos se necessário
+
+<?php echo get_stylesheet_directory_uri(); ?>
+Essa função adiciona o caminho até a raiz do tema
+ou
+<?php echo get_template_directory_uri(); ?>
+
+
+7 - Separar o header e o footer em arquivos header.php e footer.php
+
+Adicionar o header e footer nas páginas do site e mudá-las para .php
+Com <?php get_header(); ?> e <?php get_footer(); ?>
+
+Adicionar no header.php antes de fechar o head: <?php wp_head(); ?>
+Adicionar no footer.php antes de fechar o body: <?php wp_footer(); ?>
+
+
+8 - Começar a substituir o conteúdo por funções de WordPress
+
+<?php bloginfo('name'); ?>
+Mostra o nome do blog/site
+
+
+9 - Transformar as páginas em HTML, em templates de Páginas
+
+A página index.php deve estar reservada para conteúdo genérico.
+Adicionar o nome page- na frente de cada template de página para facilitar a organização (opcional).
+Adicionar no início das páginas/templates:
+<?php
+// Template Name: nome da página
+?>
+
+
+10 - Adicionar as páginas na interface do WordPress
+
+Em Atributos de página > selecionar o modelo da página/template no menu suspenso
+
+Configurar em:
+Configurações > Leitura > Sua página inicial exibe: Uma página estática > Pagina inicial: Home
+Configurações > Links permanentes: Nome do post
+
+
+11 - Adicionar o Loop
+
+O Loop é utilizado para mostrar o conteúdo dos posts,
+ele é inteligente o suficiente para saber se precisa mostrar apenas um ou uma sequência.
+
+Adicionar o Loop nas páginas e no index.php
+
+<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+	
+	<?php the_title(); ?>
+	<?php the_content(); ?>
+  // ...
+
+<?php endwhile; else: ?>
+	<p><?php _e('Sorry, no posts matched your criteria.'); ?></p>
+<?php endif; ?>
+
+// texto com formatação/estilo
+<?php endwhile; else: ?>
+	<section class="container sobre">
+		<div class="grid-8">
+			<p>Essa página não existe</p>
+		</div>
+	</section>
+<?php endif; ?>
+
+// ou só fechando (mais simples / sem mensagem)
+<?php endwhile; else: endif; ?>
+
+
+12 - Advanced Custom Fields
+
+Adicionar o Plugin Advanced Custom Fields Pro
+(Nota: o Pro é pago e só pode ser utilizado nos arquivos do curso)
+(Existem alternativas, como o CMB2, a lógica é a mesma - ver listagem na planilha em Links úteis)
+
+Iniciar a troca do conteúdo por fields, <?php the_field('nome_conteudo'); ?>
+Adicionar o conteúdo a interface do Custom Fields.
+
+
+13 - Repeater Field
+
+<?php if(have_rows('nomedorepeater')): while(have_rows('nomedorepeater')) : the_row(); ?>
+	
+	<?php the_sub_field('nomedocampo'); ?>
+
+<?php endwhile; else : endif; ?>
+
+
+14 - Pegar valores de outras páginas
+
+// Pelo título da página:
+<?php $contato = get_page_by_title('contato');
+<p><?php the_field('endereco_header', $contato); ?></p>
+<p class="telefone"><?php the_field('telefone_header', $contato); ?></p>
+
+// Pelo ID da página (melhor opção, pois o usuário pode querer mudar o título):
+<?php $contato = 29; ?>
+<p><?php the_field('endereco_header', $contato); ?></p>
+<p class="telefone"><?php the_field('telefone_header', $contato); ?></p>
+
+// Pelo ID, sem a variável:
+<p><?php the_field('endereco_header', 29); ?></p>
+<p class="telefone"><?php the_field('telefone_header', 29); ?></p>
+
+
+15 - Terminar de adicionar os outros campos, exemplo:
+<?php echo date("Y"); ?> (Mostra o ano corrente) usando no footer
+
+
+16 - Adicionar campos para SEO
+<title><?php bloginfo('name'); ?> - <?php wp_title(''); ?> <?php the_field('title_seo'); ?></title>
+<meta name="description" content="<?php bloginfo('name'); ?> - <?php wp_title(''); ?> <?php the_field('description_seo'); ?>">
+
+
+17 - Criar o functions.php e adicionar:
+
+// Funções para Limpar o Header
+remove_action('wp_head', 'rsd_link');
+remove_action('wp_head', 'wlwmanifest_link');
+remove_action('wp_head', 'start_post_rel_link', 10, 0 );
+remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
+remove_action('wp_head', 'feed_links_extra', 3);
+remove_action('wp_head', 'wp_generator');
+remove_action('wp_head', 'print_emoji_detection_script', 7);
+remove_action('admin_print_scripts', 'print_emoji_detection_script');
+remove_action('wp_print_styles', 'print_emoji_styles');
+remove_action('admin_print_styles', 'print_emoji_styles');
+
+
+18 - Configurar o Menu
+
+// Habilitar Menus - Adicionar no function.php:
+add_theme_support('menus');
+
+// Adicionar/substituir Menus - Adicionar/substituir no header.php e no footer.php:
+<?php
+	$args = array(
+		'menu' => 'principal',
+		'container' => false
+	);
+	wp_nav_menu( $args );
+?>
+
+// Caso seja mais de um menu, habilitá-los no function.php, de acordo com a documentação do WP:
+function register_my_menus() {
+  register_nav_menus(
+    array(
+      'header-menu' => __( 'Header Menu' ),
+      'extra-menu' => __( 'Extra Menu' )
+    )
+  );
+}
+add_action( 'init', 'register_my_menus' );
