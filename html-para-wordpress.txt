@@ -112,6 +112,7 @@ Em Atributos de página > selecionar o modelo da página/template no menu suspen
 Configurar em:
 Configurações > Leitura > Sua página inicial exibe: Uma página estática > Pagina inicial: Home
 Configurações > Links permanentes: Nome do post
+Configurações > Mídia > [] Organizar arquivos enviados em pastas baseadas no mês e ano  <-- Desmarcar
 
 
 11 - Adicionar o Loop
