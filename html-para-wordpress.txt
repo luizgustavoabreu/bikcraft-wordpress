@@ -17,6 +17,8 @@ https://github.com/CMB2/CMB2/wiki
 https://github.com/CMB2/CMB2/wiki/Field-Types
 https://docs.google.com/spreadsheets/d/1mSqienVYxLopTFGLPK0lGCJst2knKzXDtLQRgwjeBN8/edit#gid=3
 https://developer.wordpress.org/reference/functions/is_page
+https://developer.wordpress.org/reference/functions/add_image_size
+https://developer.wordpress.org/reference/functions/wp_get_attachment_image_src
 
 
 
@@ -205,6 +207,45 @@ if(!is_page('sobre')) {
 
 15 - Terminar de adicionar os outros campos, exemplo:
 <?php echo date("Y"); ?> (Mostra o ano corrente) usando no footer
+
+// Altera CSS com um campo personalizado:
+<style type="text/css">
+  .titulo {
+    background-image: url(“<?php the_field('background'); ?>”);
+  }
+</style>
+
+// Mostrar imagens de tamanhos diferentes:
+<?php
+$imagem_id = get_field('imagem');
+$imagem_grande = wp_get_attachment_image_src( $imagem_id, 'grande' );
+$imagem_pequena = wp_get_attachment_image_src( $imagem_id, 'pequena' );
+?>
+
+<?php echo $imagem_grande[0]; ?>
+
+
+// Adicionar tamanhos de imagens
+
+// Adiciona novos tamanhos:
+function my_custom_sizes() {
+  add_image_size( 'grande', 1400, 460, true );
+  add_image_size( 'pequena', 360, 260, true );
+}
+add_action( 'after_setup_theme', 'my_custom_sizes' );
+
+// Tamanhos padrões já existentes no WP:
+large
+medium
+thumb
+
+// Sobrescreve os tamanhos padrões:
+function my_custom_sizes()
+{
+  add_image_size('large', 1400, 380, true);
+  add_image_size('medium', 768, 380, true);
+}
+add_action('after_setup_theme', 'my_custom_sizes');
 
 
 16 - Adicionar campos para SEO
