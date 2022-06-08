@@ -79,6 +79,7 @@ Version: 1.0
 <?php echo get_stylesheet_directory_uri(); ?>
 Essa função adiciona o caminho até a raiz do tema
 ou
+Pegar o diretório do template:
 <?php echo get_template_directory_uri(); ?>
 
 
