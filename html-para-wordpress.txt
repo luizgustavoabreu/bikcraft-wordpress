@@ -19,6 +19,7 @@ https://docs.google.com/spreadsheets/d/1mSqienVYxLopTFGLPK0lGCJst2knKzXDtLQRgwje
 https://developer.wordpress.org/reference/functions/is_page
 https://developer.wordpress.org/reference/functions/add_image_size
 https://developer.wordpress.org/reference/functions/wp_get_attachment_image_src
+https://developer.wordpress.org/reference/functions/register_post_type
 
 
 
@@ -269,7 +270,58 @@ remove_action('wp_print_styles', 'print_emoji_styles');
 remove_action('admin_print_styles', 'print_emoji_styles');
 
 
-18 - Configurar o Menu
+18 - Adicionar Custom Post Types
+
+// Adicionar no arquivo functions.php:
+
+function custom_post_type_produtos() {
+	register_post_type('produtos', array(
+		'label' => 'Produtos',
+		'description' => 'Produtos',
+		'public' => true,
+		'show_ui' => true,
+		'show_in_menu' => true,
+		'capability_type' => 'post',
+		'map_meta_cap' => true,
+		'hierarchical' => false,
+		'rewrite' => array('slug' => 'produtos', 'with_front' => true),
+		'query_var' => true,
+		'supports' => array('title', 'editor', 'page-attributes','post-formats'),
+
+		'labels' => array (
+			'name' => 'Produtos',
+			'singular_name' => 'Produto',
+			'menu_name' => 'Produtos',
+			'add_new' => 'Adicionar Novo',
+			'add_new_item' => 'Adicionar Novo Produto',
+			'edit' => 'Editar',
+			'edit_item' => 'Editar Produto',
+			'new_item' => 'Novo Produto',
+			'view' => 'Ver Produto',
+			'view_item' => 'Ver Produto',
+			'search_items' => 'Procurar Produtos',
+			'not_found' => 'Nenhum Produto Encontrado',
+			'not_found_in_trash' => 'Nenhum Produto Encontrado no Lixo',
+		)
+	));
+}
+add_action('init', 'custom_post_type_produtos');
+
+// O template utilizado é pego no arquivo single-"slug".php (ou index.php caso não exista).
+
+<?php
+	$args = array (
+		'post_type' => 'produtos'
+	);
+	$the_query = new WP_Query ( $args );
+?>
+
+<?php if ( $the_query->have_posts() ) : while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+	<h1><?php the_title(); ?></h1>
+<?php endwhile; else: endif; ?>
+
+
+19 - Configurar o Menu
 
 // Habilitar Menus - Adicionar no function.php:
 add_theme_support('menus');
