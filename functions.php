@@ -56,3 +56,5 @@ function custom_post_type_produtos() {
 	));
 }
 add_action('init', 'custom_post_type_produtos');
+
+?>
