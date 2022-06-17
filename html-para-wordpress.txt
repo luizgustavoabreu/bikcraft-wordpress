@@ -20,6 +20,7 @@ https://developer.wordpress.org/reference/functions/is_page
 https://developer.wordpress.org/reference/functions/add_image_size
 https://developer.wordpress.org/reference/functions/wp_get_attachment_image_src
 https://developer.wordpress.org/reference/functions/register_post_type
+https://developer.wordpress.org/reference/classes/wp_query
 
 
 
@@ -309,9 +310,13 @@ add_action('init', 'custom_post_type_produtos');
 
 // O template utilizado é pego no arquivo single-"slug".php (ou index.php caso não exista).
 
+
+19 - Loop com WP_Query
+
 <?php
 	$args = array (
-		'post_type' => 'produtos'
+		'post_type' => 'produtos',
+		'order'   => 'ASC'
 	);
 	$the_query = new WP_Query ( $args );
 ?>
@@ -320,8 +325,11 @@ add_action('init', 'custom_post_type_produtos');
 	<h1><?php the_title(); ?></h1>
 <?php endwhile; else: endif; ?>
 
+// Resetar o Loop
+<?php wp_reset_query(); wp_reset_postdata(); ?>
 
-19 - Configurar o Menu
+
+20 - Configurar o Menu
 
 // Habilitar Menus - Adicionar no function.php:
 add_theme_support('menus');
