@@ -155,7 +155,7 @@ img {
   color: #fff;
 }
 
-.header_menu ul li a.menu_ativo {
+.header_menu ul li.current_page_item a {
   color: #fff;
 }
 

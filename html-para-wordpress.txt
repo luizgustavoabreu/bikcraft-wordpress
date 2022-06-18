@@ -343,7 +343,7 @@ add_theme_support('menus');
 	wp_nav_menu( $args );
 ?>
 
-// Caso seja mais de um menu, habilitá-los no function.php, de acordo com a documentação do WP:
+// Caso seja mais de um menu, habilitá-los (registrar Menus) no function.php, de acordo com a documentação do WP:
 function register_my_menus() {
   register_nav_menus(
     array(
@@ -353,3 +353,34 @@ function register_my_menus() {
   );
 }
 add_action( 'init', 'register_my_menus' );
+
+// Registrar o Menu
+
+// No functions.php:
+function register_my_menu() {
+  register_nav_menu('header-menu',__( 'Header Menu' ));
+}
+add_action( 'init', 'register_my_menu' );
+
+// No header.php:
+<?php
+	$args = array(
+		'menu' => 'principal',
+		'theme_location' => 'menu-principal',
+		'container' => false
+	);
+	wp_nav_menu( $args );
+?>
+
+Adicionar ao css
+// .current_page_item a
+
+.header_menu ul li.current_page_item a {
+  color: #fff;
+}
+
+
+21 - Adicionar o JS e o CSS da forma correta
+
+
+22 - Adicionar o SEO

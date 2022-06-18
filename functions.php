@@ -15,16 +15,21 @@ remove_action('admin_print_styles', 'print_emoji_styles');
 // Habilitar Menus
 add_theme_support('menus');
 
+// Registrar Menu
+function register_my_menu(){
+	register_nav_menu('menu-principal', __('Menu Principal'));
+}
+add_action('init', 'register_my_menu');
+
 // Tamanhos personalizados de imagens
-function my_custom_sizes()
-{
-  add_image_size('large', 1400, 380, true);
-  add_image_size('medium', 768, 380, true);
+function my_custom_sizes(){
+	add_image_size('large', 1400, 380, true);
+	add_image_size('medium', 768, 380, true);
 }
 add_action('after_setup_theme', 'my_custom_sizes');
 
 // Custom Post Types
-function custom_post_type_produtos() {
+function custom_post_type_produtos(){
 	register_post_type('produtos', array(
 		'label' => 'Produtos',
 		'description' => 'Produtos',
@@ -36,9 +41,9 @@ function custom_post_type_produtos() {
 		'hierarchical' => false,
 		'rewrite' => array('slug' => 'produtos', 'with_front' => true),
 		'query_var' => true,
-		'supports' => array('title', 'editor', 'page-attributes','post-formats'),
+		'supports' => array('title', 'editor', 'page-attributes', 'post-formats'),
 
-		'labels' => array (
+		'labels' => array(
 			'name' => 'Produtos',
 			'singular_name' => 'Produto',
 			'menu_name' => 'Produtos',
@@ -56,5 +61,3 @@ function custom_post_type_produtos() {
 	));
 }
 add_action('init', 'custom_post_type_produtos');
-
-?>
