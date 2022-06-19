@@ -49,15 +49,6 @@
   </div>
 </footer>
 
-<!-- JavaScript -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script>
-  window.jQuery || document.write('<script src="js/libs/jquery-1.11.2.min.js"><\/script>')
-</script>
-<script src="js/plugins.js"></script>
-<script src="js/main.js"></script>
-<!-- JavaScript -->
-
 <script>
   (function(i, s, o, g, r, a, m) {
     i['GoogleAnalyticsObject'] = r;
