@@ -22,6 +22,7 @@ https://developer.wordpress.org/reference/functions/wp_get_attachment_image_src
 https://developer.wordpress.org/reference/functions/register_post_type
 https://developer.wordpress.org/reference/classes/wp_query
 https://developer.wordpress.org/reference/functions/wp_enqueue_script
+https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts
 
 
 
@@ -406,3 +407,21 @@ add_action( 'wp_enqueue_scripts', 'bikcraft_scripts' );
 
 
 22 - Adicionar o SEO
+
+<?php wp_title('-'); ?>
+// Incluir no título, dentro do <head> (header.php) ficando assim:
+<title><?php bloginfo('name'); ?> <?php wp_title('-'); ?> <?php the_field('title_seo'); ?></title>
+
+// Corrigir o caminho do favicon:
+<link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/favicon.ico" />
+
+Personalizar campos meta / open graph (og).
+
+Adicionar a imagem do tema.
+
+// Novo Grupo de campos personalizados
+= SEO
+Em Localização > Regras > Mostrar este grupo de campos se:
+Tipo de Post 	é igual a 	Post
+Tipo de Post 	é igual a 	Página
+Tipo de Post 	é igual a 	Produto
