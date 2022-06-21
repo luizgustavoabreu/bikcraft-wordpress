@@ -425,3 +425,12 @@ Em Localização > Regras > Mostrar este grupo de campos se:
 Tipo de Post 	é igual a 	Post
 Tipo de Post 	é igual a 	Página
 Tipo de Post 	é igual a 	Produto
+
+
+23 - Adicionar blog
+
+Criar uma página específica para o blog e selecioná-la nas Configurações > Leitura > Página de posts
+
+O template da página com a lista de posts é o home.php
+
+O template de cada postagem é o index.php ou single-post.php caso exista, ou consultar mais opções em https://wphierarchy.com
