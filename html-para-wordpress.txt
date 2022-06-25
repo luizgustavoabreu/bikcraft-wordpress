@@ -434,3 +434,25 @@ Criar uma página específica para o blog e selecioná-la nas Configurações > 
 O template da página com a lista de posts é o home.php
 
 O template de cada postagem é o index.php ou single-post.php caso exista, ou consultar mais opções em https://wphierarchy.com
+
+
+24 - Instalar um plugin de cache
+
+https://wordpress.org/plugins/wp-fastest-cache (recomendado pelo André)
+Marcar em "Opções do WP Fastest Cache":
+Activar
+Permite reduzir o tamanho dos ficheiros CSS
+Reduz pedidos HTTP ao combinar ficheiros CSS
+
+ou
+https://wordpress.org/plugins/w3-total-cache (utilizado pelo André no curso)
+
+
+25 - Colocar o site online
+
+Fazer o upload dos arquivos e dados:
+- manualmente
+- ou usando a opção Ferramentas > Exportar
+- ou com um plugin de backup
+
+Hospedei o projeto no Infinity Free = https://www.infinityfree.net
