@@ -453,6 +453,6 @@ https://wordpress.org/plugins/w3-total-cache (utilizado pelo André no curso)
 Fazer o upload dos arquivos e dados:
 - manualmente
 - ou usando a opção Ferramentas > Exportar
-- ou com um plugin de backup
+- ou com um plugin de backup (All-in-One WP Migration, Duplicator, etc.)
 
 Hospedei o projeto no Infinity Free = https://www.infinityfree.net
