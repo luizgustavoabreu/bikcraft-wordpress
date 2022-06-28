@@ -451,8 +451,8 @@ https://wordpress.org/plugins/w3-total-cache (utilizado pelo André no curso)
 25 - Colocar o site online
 
 Fazer o upload dos arquivos e dados:
-- manualmente
-- ou usando a opção Ferramentas > Exportar
+- manualmente via ftp
+- ou usando as funções de exportar do WordPress e do Advanced Custom Fields (e subir o tema via ftp) <===
 - ou com um plugin de backup (All-in-One WP Migration, Duplicator, etc.)
 
 Hospedei o projeto no Infinity Free = https://www.infinityfree.net
